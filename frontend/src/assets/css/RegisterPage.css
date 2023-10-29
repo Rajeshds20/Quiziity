@@ -1,0 +1,86 @@
+/* Styles for Register Page */
+
+.register-component {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.register-container {
+    background-color: var(--primary-bg-light);
+    color: var(--primary-text-light);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+.heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.register-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.register-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--accent-color);
+    color: var(--primary-text-light);
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-form button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.register-form button:hover {
+    background-color: #0056b3;
+}
+
+.register-form p {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.register-form a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Dark theme styles */
+body.dark-theme .register-container {
+    background-color: var(--primary-bg-dark);
+    color: var(--primary-text-dark);
+    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .register-form input,
+body.dark-theme .register-form button {
+    background-color: #333;
+    color: var(--primary-text-dark);
+    border: 1px solid #555;
+}
+
+body.dark-theme .register-form button:hover {
+    background-color: #666;
+}
+
+body.dark-theme .register-form a {
+    color: #0099ff;
+}

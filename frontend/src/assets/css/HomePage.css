@@ -1,0 +1,62 @@
+/* Styles for Home Page */
+
+.home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    min-height: 100vh;
+    padding: 20px;
+    text-align: center;
+}
+
+.home-page-content {
+    margin-top: 50px;
+    margin-left: 20px;
+}
+
+.home-page-content-header {
+    position: relative;
+    left: 0;
+    margin: 20px;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    justify-content: space-between;
+}
+
+.home-title {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.text-center {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.logout-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 2px solid red;
+    border-radius: 5px;
+    background-color: transparent;
+    color: red;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: none;
+}
+
+.logout-button:hover {
+    background-color: red;
+    color: white;
+}
+
+
+@media screen and (max-width: 768px) {
+    .logout-button {
+        display: block;
+    }
+}

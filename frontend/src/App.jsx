@@ -1,7 +1,9 @@
 import './App.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import HomePage from './components/HomePage';
-import LoginPage from './components/LoginPage';
+import HomePage from './Pages/HomePage';
+import LoginPage from './Pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import { UserProvider } from './config/UserContext';
 
 const routes = createBrowserRouter([
   {
@@ -14,7 +16,7 @@ const routes = createBrowserRouter([
   },
   {
     path: '/register',
-    element: <h1>Register Page</h1>,
+    element: <RegisterPage />,
   },
   {
     path: '/*',
@@ -36,9 +38,9 @@ function App() {
   // }, []);
 
   return (
-    <>
+    <UserProvider>
       <RouterProvider router={routes} />
-    </>
+    </UserProvider>
   )
 }
 

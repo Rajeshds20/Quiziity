@@ -22,11 +22,11 @@ mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true }).then(() => c
 
 const port = process.env.PORT || 5000;
 
-app.use(express.json());
 const corsOptions = {
     origin: 'http://localhost:5173', // Allow requests from this origin
     credentials: true, // Enable credentials (cookies, authorization headers, etc.)
 };
+app.use(express.json());
 app.use(cors(corsOptions));
 app.use(cookieParser());
 
@@ -34,7 +34,8 @@ app.get('/', (req, res) => res.send('Server running for Quiz App...'));
 
 app.get('/user/hi', userAuthentication, (req, res) => {
     try {
-        res.status(200).json({ message: `Hello ${req.user.name}` });
+        const user = req.user;
+        res.status(200).json({ message: `Hello ${req.user.name}`, user: { userId: user._id, name: user.name } });
     }
     catch (err) {
         res.status(500).json({ message: err.message });
@@ -104,7 +105,7 @@ app.post('/user/login', async (req, res) => {
 
 app.get('/user/logout', (req, res) => {
     res.cookie('authToken', '', { maxAge: 10, httpOnly: true });
-    res.json({ message: "User logged out successfully" });
+    res.status(200).json({ message: "User logged out successfully" });
 });
 
 app.get('/quiz/create', userAuthentication, async (req, res) => {
@@ -278,4 +279,4 @@ app.post('/questions/create', async (req, res) => {
     }
 });
 
-app.listen(port, () => console.log(`Quiz app listening on port ${port}!`));
+app.listen(port, () => console.log(`Quiziity app listening on port ${port}!`));

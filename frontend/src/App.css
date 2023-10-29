@@ -1,42 +1,30 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+:root {
+  --primary-bg-light: #ffffff;
+  --primary-bg-dark: #1f1f1f;
+  --primary-text-light: #333333;
+  --primary-text-dark: #ffffff;
+  --accent-color: #007bff;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body {
+  background-color: var(--primary-bg-dark);
+  color: var(--primary-text-dark);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Dark theme styles */
+body.dark-theme {
+  background-color: var(--primary-bg-dark);
+  color: var(--primary-text-dark);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.dark-theme {
+  background-color: var(--primary-bg-dark);
+  color: var(--primary-text-dark);
 }
 
-.card {
-  padding: 2em;
+.light-theme {
+  background-color: var(--primary-bg-light);
+  color: var(--primary-text-light);
 }
 
-.read-the-docs {
-  color: #888;
-}
+/* Add your component-specific styles here */
