@@ -51,12 +51,17 @@ export default function LoginPage() {
                 else {
                     console.log("Login failed");
                     setInvalid(true);
+                    setLoading(false);
+                    e.target.reset();
                 }
-                setLoading(false);
             })
-            .catch(
-                console.log("Login failed")
-            );
+            .catch((er) => {
+                console.log("Login failed", er.message);
+                alert("Login failed, try again later");
+                setInvalid(true);
+                setLoading(false);
+                e.target.reset();
+            });
     }
 
     return (
@@ -71,11 +76,11 @@ export default function LoginPage() {
                     <input className={`${darkTheme ? 'dark' : 'light'}-theme`} id='login-email' type="email" name="email" placeholder="Email" />
                     <input className={`${darkTheme ? 'dark' : 'light'}-theme`} id='login-password' type="password" name="password" placeholder="Password" />
                     {
-                        Invalid ? <p style={{ color: 'red', margin: '-10px' }}>Invalid Credentials</p> : null
+                        Invalid ? <p style={{ color: 'red', marginTop: '-10px' }}>Invalid Credentials</p> : <p></p>
                     }
-                    {
-                        loading ? <button disabled type='submit'>Loading...</button> : <button type="submit">Login</button>
-                    }
+                    <button className='login-button' type="submit" disabled={loading}>
+                        {loading ? 'Loading...' : 'Login'}
+                    </button>
                     <div>
                         <p>Don't have an account? <a href="/register">Register</a></p>
                     </div>

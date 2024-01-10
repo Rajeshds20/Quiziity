@@ -12,14 +12,14 @@
 
 .home-page-content {
     margin-top: 50px;
-    margin-left: 20px;
+    /* margin-left: 20px; */
 }
 
 .home-page-content-header {
     position: relative;
     left: 0;
     margin: 20px;
-    width: 100vw;
+    width: 90vw;
     display: flex;
     align-items: center;
     margin-bottom: 20px;
@@ -27,13 +27,13 @@
 }
 
 .home-title {
-    font-size: 36px;
+    font-size: 28px;
     margin-bottom: 20px;
 }
 
 .text-center {
     text-align: center;
-    font-size: 24px;
+    font-size: 32px;
     margin-bottom: 20px;
 }
 
@@ -58,5 +58,208 @@
 @media screen and (max-width: 768px) {
     .logout-button {
         display: block;
+    }
+}
+
+.new-quiz-section,
+.global-ranking-section {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 20px;
+    margin-top: 30px;
+}
+
+.new-quiz-title,
+.global-ranking-title {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.new-quiz-body,
+.global-ranking-body {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.new-quiz-button,
+.global-ranking-button {
+    background-color: #ff747b;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.new-quiz-button:hover,
+.global-ranking-button:hover {
+    background-color: #f69396;
+    color: rgb(74, 69, 69);
+}
+
+.main-page {
+    margin-left: -20px;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #2b2b2b;
+    /* Dark background color */
+    color: #fff;
+    /* Text color */
+}
+
+.main-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.main-page-content {
+    text-align: center;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+.main-title {
+    font-size: 2.5rem;
+}
+
+.main-body {
+    font-size: 1.2rem;
+    margin: 20px 0;
+}
+
+.main-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-button {
+    background-color: #437DE1;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.main-button:hover {
+    background-color: #005BF7;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .main-page-content {
+        padding: 10px;
+    }
+}
+
+/* Add this to your existing CSS or create a new CSS file */
+
+.about-section {
+    text-align: center;
+    max-width: 800px;
+    margin: auto;
+    padding: 40px 20px;
+    background-color: #2b2b2b;
+    /* Dark background color */
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-title {
+    font-size: 2.5rem;
+    color: #4caf50;
+    /* Green color for the title */
+}
+
+.about-body {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-top: 20px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .about-section {
+        padding: 30px 10px;
+    }
+}
+
+/* Add this to your existing CSS or create a new CSS file */
+
+.contact-section {
+    text-align: center;
+    max-width: 800px;
+    margin: auto;
+    padding: 40px 20px;
+    background-color: #333;
+    /* Dark background color */
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-title {
+    font-size: 2.5rem;
+    color: #4caf50;
+    /* Green color for the title */
+}
+
+.contact-body {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    line-height: 1.6;
+}
+
+.contact-body a {
+    color: #4caf50;
+    /* Green color for links */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contact-body a:hover {
+    color: #45a049;
+    /* Darker green color on hover */
+}
+
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px 0;
+    background-color: #222;
+    /* Dark background color for footer */
+    color: #fff;
+}
+
+.footer-body {
+    font-size: 1rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 30px 10px;
+    }
+
+    .footer {
+        padding: 10px 0;
     }
 }

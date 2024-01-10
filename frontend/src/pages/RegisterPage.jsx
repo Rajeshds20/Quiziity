@@ -48,8 +48,12 @@ export default function RegisterPage() {
                     navigate('/login');
                 }
                 else {
-                    console.log("Registration failed");
                     setInvalid(true);
+                    setLoading(false);
+                    if (response.status === 409) {
+                        alert("User already exists");
+                    }
+                    console.log("Registration failed");
                 }
             })
             .catch(
@@ -60,7 +64,7 @@ export default function RegisterPage() {
     return (
         <div className={`register-component ${darkTheme ? 'dark' : 'light'}`}>
             <div className='register-container'>
-                <h1 className='heading'>Register Page</h1>
+                <h1 className='heading'>Register Account</h1>
 
                 <form
                     id='register-form'
@@ -70,7 +74,7 @@ export default function RegisterPage() {
                     <input id='register-email' type="email" name="email" placeholder="Email" />
                     <input id='register-password' type="password" name="password" placeholder="Password" />
                     {
-                        Invalid ? <p style={{ color: 'red', margin: '-10px' }}>Registration Failed</p> : null
+                        Invalid ? <p style={{ color: 'red', margin: '10px' }}>Registration Failed</p> : null
                     }
                     {
                         loading ? <button disabled type='submit'>Loading...</button> : <button type="submit">Register</button>

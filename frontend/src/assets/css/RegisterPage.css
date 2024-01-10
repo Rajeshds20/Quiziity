@@ -84,3 +84,79 @@ body.dark-theme .register-form button:hover {
 body.dark-theme .register-form a {
     color: #0099ff;
 }
+
+/* Add this to your existing CSS or create a new CSS file */
+
+/* Light Theme Styles */
+.register-component.light {
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+/* Dark Theme Styles */
+.register-component.dark {
+    background-color: #2b2b2b;
+    color: #fff;
+}
+
+.register-container {
+    text-align: center;
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.heading {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+#register-form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: rgb(78, 74, 160);
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+button:hover {
+    background-color: #1b46d3;
+}
+
+p {
+    margin-top: 10px;
+}
+
+a {
+    color: #4caf50;
+    text-decoration: none;
+}
+
+
+/* Additional styles for error message */
+#register-form p.error {
+    color: red;
+    margin: -10px 0 10px;
+}

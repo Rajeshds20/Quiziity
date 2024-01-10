@@ -24,6 +24,12 @@ const UserSchema = new mongoose.Schema({
             ref: 'Quiz',
         }
     ],
+    openQuizzes: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'OpenQuiz',
+        }
+    ],
     joined: {
         type: Date,
         default: Date.now,
