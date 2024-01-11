@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const userAuth = require('../middleware/userAuth');
 const Quiz = require('../models/Quiz');
+const Question = require('../models/Question');
+const User = require('../models/User');
 
 router.get('/create', userAuth, async (req, res) => {
     try {
@@ -42,7 +44,7 @@ router.get('/create', userAuth, async (req, res) => {
 
 router.get('/details/:quizId', userAuth, async (req, res) => {
     try {
-        const quiz = await Quiz.findById(req.params.id).populate('questions user');
+        const quiz = await Quiz.findById(req.params.quizId).populate('questions user');
         if (!quiz) {
             return res.status(404).json({ message: "Quiz not found" });
         }
@@ -53,31 +55,53 @@ router.get('/details/:quizId', userAuth, async (req, res) => {
     }
 });
 
-router.post('/quiz/:quizId', userAuth, async (req, res) => {
+router.post('/submit/:quizId', userAuth, async (req, res) => {
     try {
-        const quiz = await Quiz.findById(req.params.quizId).populate('questions');
+        // const quiz = await Quiz.findById(req.params.quizId).populate('questions');
+        const quiz = await Quiz.findOneAndUpdate(
+            { _id: req.params.quizId, user: req.user._id },
+            {
+                $set: {
+                    score: req.body.score,
+                    submittedAnswers: req.body.answers.map(answer => answer === "" ? "Not Submitted" : answer)
+                }
+            },
+            { new: true }
+        ).populate('questions');
+
         if (!quiz) {
             return res.status(404).json({ message: "Quiz not found" });
         }
 
-        if (quiz.user !== req.user._id) {
+        if (quiz.user.toString() !== req.user._id.toString()) {
             return res.status(403).json({ message: "You are not allowed to submit this quiz." });
         }
-        const { answers } = req.body;
-        if (!answers) {
+        const { answers, score } = req.body;
+        if (!answers || score === null) {
             return res.status(400).json({ message: "Please enter all fields" });
         }
 
-        const score = quiz.questions.reduce((score, question, index) => {
-            if (question.correct == answers[index]) {
-                score += 1;
-            }
-            return score;
-        }, 0);
+        // const score = quiz.questions.reduce((score, question, index) => {
+        //     if (question.correct == answers[index]) {
+        //         score += 1;
+        //     }
+        //     return score;
+        // }, 0);
 
-        quiz.score = score;
-        quiz.submittedAnswers = answers;
-        await quiz.save();
+        // quiz.score = score;
+
+        // Replace empty string answers with 'Not Submitted'
+        // for (let i = 0; i < answers.length; i++) {
+        //     if (answers[i] === "") {
+        //         answers[i] = "Not Submitted";
+        //     }
+        // }
+
+        // await quiz.save();
+
+        // quiz.submittedAnswers = answers;
+        // await quiz.save();
+        // console.log(quiz);
 
         const user = await User.findById(quiz.user);
         // Add score based exp to user for 100 base
@@ -92,6 +116,7 @@ router.post('/quiz/:quizId', userAuth, async (req, res) => {
         res.json({ message: "Quiz submitted successfully", score });
     }
     catch (err) {
+        console.log(err);
         res.status(500).json({ message: err.message });
     }
 });

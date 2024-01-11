@@ -3,7 +3,7 @@ const router = express.Router();
 const userAuth = require('../middleware/userAuth');
 const OpenQuiz = require('../models/OpenQuiz');
 const OpenQuizRes = require('../models/OpenQuizRes');
-const { RecursiveCodeGen, generateLeaderboard } = require('../config/static');
+const { RecursiveCodeGen, generateLeaderboard } = require('../util/static');
 
 router.post('/create', userAuth, async (req, res) => {
     try {
@@ -49,7 +49,7 @@ router.get('/:quizCode', async (req, res) => {
     }
 });
 
-router.get('/:quizCode/submit', async (req, res) => {
+router.post('/:quizCode/submit', async (req, res) => {
     try {
         const { userName, answers } = req.body;
         if (!userName || !answers) {
@@ -62,7 +62,7 @@ router.get('/:quizCode/submit', async (req, res) => {
         }
 
         const score = quiz.questions.reduce((score, question, index) => {
-            if (question.answer == answers[index]) {
+            if (question.options[question.answer - 1] == answers[index]) {
                 score += 1;
             }
             return score;

@@ -40,7 +40,7 @@ const routes = createBrowserRouter([
     element: <QuizPage />,
   },
   {
-    path: '/quiz/:id',
+    path: '/quiz/:quizId',
     element: <PlayQuiz />
   },
   {

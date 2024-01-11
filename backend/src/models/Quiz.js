@@ -15,17 +15,18 @@ const quizSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
-    score: {
-        type: Number,
-        default: 0,
-    },
     created: {
         type: Date,
         default: Date.now,
     },
+    timeTaken: {
+        type: Number,
+        default: 0,
+    },
     submittedAnswers: [
         {
             type: String,
+            required: true,
         }
     ],
 });

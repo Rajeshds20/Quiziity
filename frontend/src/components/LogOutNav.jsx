@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../assets/css/NavBar.css';
 import TextLogo from '../assets/images/TextLogo.png';
 
-const LogoutNav = () => {
+const LogoutNav = ({ from }) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
 
@@ -62,13 +62,12 @@ const LogoutNav = () => {
                         <Link to="/contact" onClick={handleToggle}>Contact</Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/login" onClick={handleToggle}>Login</Link>
+                        <Link to={from ? `/login?next=${from}` : '/login'} onClick={handleToggle}>Login</Link>
                     </li>
                     <li className="nav-item">
                         <Link to="/register" onClick={handleToggle}>Register</Link>
                     </li>
                     {/* My Profile Icon, with dropout logout and My profile page nav */}
-
                 </ul>
             </div>
         </nav>

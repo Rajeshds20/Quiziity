@@ -8,6 +8,9 @@ export default function LoginPage() {
 
     const navigate = useNavigate();
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const nextVar = urlParams.get('next');
+
     const [loading, setLoading] = useState(false);
     const [Invalid, setInvalid] = useState(false);
     const API_URL = import.meta.env.VITE_API_URL;
@@ -16,6 +19,7 @@ export default function LoginPage() {
 
     useEffect(() => {
         if (loggedIn) {
+            if (nextVar) navigate(nextVar);
             navigate('/');
         }
     }, [loggedIn, navigate]);
@@ -46,7 +50,12 @@ export default function LoginPage() {
                     setInvalid(false);
                     alert("Login Successful");
                     login(data.userId);
-                    navigate('/');
+                    console.log(nextVar);
+                    if (nextVar) {
+                        navigate(decodeURIComponent('/' + nextVar));
+                    } else {
+                        navigate('/');
+                    }
                 }
                 else {
                     console.log("Login failed");

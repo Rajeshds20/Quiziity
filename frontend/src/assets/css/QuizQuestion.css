@@ -1,0 +1,51 @@
+/* QuizQuestion.css */
+
+.quiz-question-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.quiz-question {
+    background-color: #f8f8f8;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.options-container {
+    margin-top: 10px;
+}
+
+.options-container .option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.quiz-question-container input[type="radio"] {
+    margin-right: 8px;
+}
+
+/* Text Color */
+.quiz-question-container h3 {
+    color: #333333;
+}
+
+/* Label Color */
+.quiz-question-container label {
+    color: #555555;
+}
+
+/* Border and Background Color for Selected Option */
+.quiz-question-container input[type="radio"]:checked+label {
+    background-color: #4caf50;
+    color: #ffffff;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .quiz-question {
+        padding: 15px;
+    }
+}

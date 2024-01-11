@@ -1,0 +1,53 @@
+/* QuizAnswer.css */
+
+.quiz-answer-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    /* White background */
+    color: #000000;
+    /* Black text color */
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-answer-container h4 {
+    color: #333333;
+}
+
+.answer-status {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.answer-status.submitted {
+    color: #4caf50;
+    /* Green color for submitted answers */
+}
+
+.answer-status.not-submitted {
+    color: #f44336;
+    /* Red color for not submitted answers */
+}
+
+.quiz-answer-container p {
+    margin-bottom: 8px;
+}
+
+.explanation {
+    margin-top: 20px;
+}
+
+/* Markdown styles */
+.explanation p {
+    margin-bottom: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .quiz-answer-container {
+        padding: 15px;
+    }
+}
