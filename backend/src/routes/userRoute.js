@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const NodeCache = require("node-cache");
+const rankingCache = new NodeCache();
 
 const userAuth = require('../middleware/userAuth');
 const User = require('../models/User');
@@ -125,19 +127,35 @@ router.get('/myhistory', userAuth, async (req, res) => {
 
 router.get('/rankings', userAuth, async (req, res) => {
     try {
-        const page = req.query.page || 1;
-        const limit = req.query.limit || 10;
+        const page = parseInt(req.query.page, 10) || 1;
+        const limit = parseInt(req.query.limit, 10) || 10;
+
+        // const users = await User.find({})
+        // const totalCount = users.length;
+        // Get the limit of users in page in sorted order of exp and avg score
+        // users.sort((a, b) => {
+        //     if (a.exp == b.exp) {
+        //         return b.avgscore - a.avgscore;
+        //     }
+        //     return b.exp - a.exp;
+        // });
+        // users.splice(limit * (page - 1), limit);
+
+        // Check if the result is in the cache
+        const cacheKey = `rankings_${page}_${limit}`;
+        const cachedResult = rankingCache.get(cacheKey);
+
+        if (cachedResult) {
+            // console.log("Cache hit for", cacheKey);
+            return res.status(200).json(cachedResult);
+        }
 
         const users = await User.find({})
-        const totalCount = users.length;
-        // Get the limit of users in page in sorted order of exp and avg score
-        users.sort((a, b) => {
-            if (a.exp == b.exp) {
-                return b.avgscore - a.avgscore;
-            }
-            return b.exp - a.exp;
-        });
-        users.splice(limit * (page - 1), limit);
+            .sort({ exp: -1, avgscore: -1 })
+            .skip((page - 1) * limit)
+            .limit(limit);
+
+        const totalCount = await User.countDocuments({});
 
         if (!users) {
             return res.status(404).json({ message: "Users not found" });
@@ -149,13 +167,21 @@ router.get('/rankings', userAuth, async (req, res) => {
                 email: user.email,
                 level: user.level,
                 quizCount: user.quizCount,
-                rank: index + 1,
+                rank: index + 1 + (limit * (page - 1)),
                 exp: user.exp,
                 avgscore: user.avgscore,
             };
         });
 
-        res.json({ message: "Users Ranked", users: usersRankData, totalCount });
+        // res.json({ message: "Users Ranked", users: usersRankData, totalCount });
+
+        const result = { message: "Users Ranked", users: usersRankData, totalCount };
+        // console.log("Cache miss for", cacheKey);
+
+        // Cache the result with a TTL (time-to-live) of 1 hr
+        rankingCache.set(cacheKey, result, 3600); // Cache for 3600 seconds
+
+        res.status(200).json(result);
     }
     catch (err) {
         res.status(500).json({ message: err.message });
